@@ -1,6 +1,9 @@
 # Genomics England PanelApp analysis
 An analysis of the genes in Genomics England (GEL) PanelApp.
 
+## Details
+Written for python3.
+
 ## PanelWrapper
 Two classes within wrap the API. Panel and Gene.                 
 
@@ -29,4 +32,8 @@ Those of Panel are:
 * relevant_disorders
 * n_genes
 * types
+
+
+## Licence
+The licence is the same as the GEL PanelApp. To figure what that is, look for that.
 
