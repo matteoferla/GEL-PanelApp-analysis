@@ -3,12 +3,22 @@ An analysis of the genes in Genomics England (GEL) PanelApp.
 
 ## Summary
 
-number of panels: **173**
-number of unique genes: **4487**
-number of phenotype-only genes: **26**
+* number of panels: **173** (stated on web: 298)
+* number of unique genes: **4487**
+* number of phenotype-only genes: **26**
 
 ![distro](distro.png)
 
+The genes fall under the following categories (if a gene has different modes of inheritance in different panels it is counted once each)
+
+* Biallelic          1940 
+* Both                379 
+* Missing            1535 
+* Mitochondrial         1 
+* Monoallelic        1273 
+* Other                36 
+* Unknown             516 
+* X-Linked            290 
 
 ## Details
 Written for python3.

@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+__doc__ = \
+    """
+
+    NB. Written for python 3, not tested under 2.
+    """
+
 import urllib.request, json, os, pprint
 from warnings import warn
 from collections import defaultdict
@@ -97,6 +105,11 @@ class Gene(_APIInterface):
                 'tags': 'tags',
                 'panel':'panel'
                 }
+
+    def clean_inheritance(self):
+        if not self.mode_of_inheritance:
+            return 'NA'
+        return self.mode_of_inheritance.replace(':', ' ').replace(',', ' ').split(' ')[0].title()
 
     @classmethod
     def get_list(cls, verbose=False):
