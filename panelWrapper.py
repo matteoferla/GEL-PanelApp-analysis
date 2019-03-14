@@ -1,5 +1,6 @@
 import urllib.request, json, os, pprint
 from warnings import warn
+from collections import defaultdict
 
 
 class _APIInterface:
@@ -108,6 +109,14 @@ class Gene(_APIInterface):
                 print('Prev', data['prev'])
         assert data['count'] == len(data['results']), 'There are {0} genes. There should be {1}.'.format(data['count'], len(data['results']))
         return [cls(g) for g in data['results']]
+
+    @classmethod
+    def get_dict(cls):
+        genedex = defaultdict(list)
+        data = cls.get_list()
+        for gene in data:
+            genedex[gene.name].append(gene)
+        return genedex
 
 
 
