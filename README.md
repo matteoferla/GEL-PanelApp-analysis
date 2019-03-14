@@ -23,13 +23,15 @@ The genes fall under the following categories (if a gene has different modes of 
 These have the following ksdensity plots:
 ![pLI](pLI.png)
 
-| &darr; Ex \ GEL&rarr; | Monoallelic | Biallelic | X-Linked | Other |
-| --- | --- | --- | --- | --- |
-| Dominant | **718** | 370 | 221 | 862 |
-| None | 115 | 263 | 10 | 326 |
-| Recessive | 440 | **1307** | 59 | 1279 |
+| &darr; Ex \ GEL&rarr; | Monoallelic/Dominant | Biallelic/Recessive | X-Linked | Other | Lethal | Neutral |
+| --- | --- | --- | --- | --- | --- | --- |
+| Predicted dominant | **718** | 370 | 221 | 862 | ? | ? |
+| Predicted recessive | 440 | **1307** | 59 | 1279 | ? | ? |
+| Predicted neutral | 115 | 263 | 10 | 326 |? | ? |
 
-I would have expected a stronger match for monoallelic... it just goes to show how specific mutation cause GoF.
+I would have expected a stronger match for monoallelic... it just goes to show how specific mutation cause GoF.     
+4k is a 1/5 of the human proteome, hence the last two columns added.
+
 
 ## Details
 Written for python3.
