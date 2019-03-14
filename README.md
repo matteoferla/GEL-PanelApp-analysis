@@ -1,6 +1,15 @@
 # Genomics England PanelApp analysis
 An analysis of the genes in Genomics England (GEL) PanelApp.
 
+## Summary
+
+number of panels: **173**
+number of unique genes: **4487**
+number of phenotype-only genes: **26**
+
+![distro](distro.png)
+
+
 ## Details
 Written for python3.
 
