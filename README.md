@@ -20,6 +20,17 @@ The genes fall under the following categories (if a gene has different modes of 
 * Unknown             516 
 * X-Linked            290 
 
+These have the following ksdensity plots:
+![pLI](pLI.png)
+
+| &darr; Ex \ GEL&rarr; | Monoallelic | Biallelic | X-Linked | Other |
+| --- | --- | --- | --- | --- |
+| Dominant | **718** | 370 | 221 | 862 |
+| None | 115 | 263 | 10 | 326 |
+| Recessive | 440 | **1307** | 59 | 1279 |
+
+I would have expected a stronger match for monoallelic... it just goes to show how specific mutation cause GoF.
+
 ## Details
 Written for python3.
 
