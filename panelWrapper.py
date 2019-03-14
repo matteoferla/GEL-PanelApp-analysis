@@ -1,4 +1,5 @@
 import urllib.request, json, os, pprint
+from warnings import warn
 
 
 class _APIInterface:
@@ -28,6 +29,12 @@ class _APIInterface:
                 setattr(self, k, defaults(k))
 
     @classmethod
+    def _fetch_list_query(cls, this_url):
+        with urllib.request.urlopen(this_url) as url:
+            data = json.loads(url.read().decode())
+        return data
+
+    @classmethod
     def _get_list(cls):
         """
         Returns a list of all dictionaries form webservices, not the api.
@@ -37,10 +44,34 @@ class _APIInterface:
             data = json.load(open(cls._list_outfile))
         else:  ##fetch
             # differs from https://panelapp.genomicsengland.co.uk/api/docs/
-            with urllib.request.urlopen(cls._list_url) as url:
-                data = json.loads(url.read().decode())
-                json.dump(data, open(cls._list_outfile, 'w'))
+            this_url = cls._list_url
+            done = False
+            data = {}
+            while not done:
+                new_data = cls._fetch_list_query(this_url)
+                ### assert no error
+                if len(new_data.keys())== 0 and 'detail' in data:
+                    raise ValueError('Error in page retrieval')
+                ### load data
+                for k in new_data.keys():
+                    if k in data:
+                        if isinstance(data[k], list):
+                            data[k].extend(new_data[k])
+                        elif isinstance(data[k], str):
+                            data[k] += str(new_data[k])
+                        else:
+                            warn('Unknown type {t} for key {k}'.format(t=type(data[k]).__name__,k=k))
+                    else:
+                        data[k] = new_data[k]
+                ### proceed
+                if 'next' in new_data and new_data['next']:  ##the last one is None/null.
+                    print('Next', new_data['next'])
+                    this_url = new_data['next']
+                else:
+                    done = True
+            json.dump(data, open(cls._list_outfile, 'w'))
         return data
+
 
     def __str__(self):
         return pprint.pformat({k: v for (k,v) in self.__dict__.items() if type(v).__name__ != 'method' and k != '_data'})
@@ -71,6 +102,11 @@ class Gene(_APIInterface):
         data = cls._get_list()
         if verbose:
             print('Count',data['count'])
+            if 'next' in data:
+                print('Next', data['next'])
+            if 'prev' in data:
+                print('Prev', data['prev'])
+        assert data['count'] == len(data['results']), 'There are {0} genes. There should be {1}.'.format(data['count'], len(data['results']))
         return [cls(g) for g in data['results']]
 
 
