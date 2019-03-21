@@ -32,3 +32,11 @@ ylabel('density')
 end
 suptitle('pLI distribution and PanelApp mode')
 print('pLI.png','-dpng','-r300')
+
+
+%%
+histogram(GELmodelled.modelled(GELmodelled.modelled>0)*100,20)
+xlabel('% length modelled (20 bins)')
+ylabel('N protein in bin')
+title('Distribution of the coverage of the models (48% protein)')
+print('models.png','-dpng','-r300')

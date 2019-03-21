@@ -25,7 +25,7 @@ names = json.load(open('GEL_names.json'))
 namedex = json.load(open(os.path.join(Protein.settings.data_folder,'human_prot_namedex.json')))
 
 def ops(name):
-    print(name)
+    #print(name)
     protein = Protein(gene_name=name)
     if name in namedex:
         protein.uniprot = namedex[name]
@@ -34,10 +34,12 @@ def ops(name):
     try:
         protein.parse_uniprot()
         protein.parse_pLI()
+        protein.parse_swissmodel()
     except Exception as err:
         warn(str(err))
-    data = {**{k: getattr(protein, k) for k in keys}, **{k: len(getattr(protein, k)) for k in lenkeys}}
-
+    data = {'%modelled': protein.get_percent_modelled(),
+            **{k: getattr(protein, k) for k in keys},
+            **{k: len(getattr(protein, k)) for k in lenkeys}}
     lock.acquire()
     sheet.writerow(data)
     lock.release()
@@ -46,11 +48,11 @@ def ops(name):
 
 with open('GEL.csv','w',newline='') as w:
     keys = ('gene_name','uniprot_name','uniprot','pLI','pRec','pNull')
-    lenkeys = ('pdbs','pdb_matches','pfam','sequence')
-    sheet = csv.DictWriter(w,keys+lenkeys)
+    lenkeys = ('pdbs','pdb_matches','sequence')
+    sheet = csv.DictWriter(w,keys+lenkeys+('%modelled',))
     sheet.writeheader()
     lock = Lock()
-    Pool(16).map(ops, names)
+    Pool(50).map(ops, names)
 
 
 

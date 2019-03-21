@@ -9,6 +9,7 @@ An analysis of the genes in Genomics England (GEL) PanelApp.
 
 ![distro](distro.png)
 
+### Inheritance mode
 The genes fall under the following categories (if a gene has different modes of inheritance in different panels it is counted once each)
 
 * Biallelic          1940 
@@ -32,6 +33,11 @@ These have the following ksdensity plots:
 I would have expected a stronger match for monoallelic... it just goes to show how specific mutation cause GoF.     
 4k is a 1/5 of the human proteome, hence the last two columns added.
 
+### Structural models
+48% of all proteins in the PanelApp have a model, either a PDB crystal structure or a Swissprot Model based on a close structure.                
+20% of all proteins in the PanelApp have a model that covers over 80% of the length.
+
+![models](models.png)
 
 ## Details
 Written for python3.
