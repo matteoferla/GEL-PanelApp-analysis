@@ -4,7 +4,7 @@ An analysis of the genes in Genomics England (GEL) PanelApp.
 ## Code details
 Written for python3.
 
-## PanelWrapper
+### PanelWrapper
 Two classes within wrap the GEL PanelApp Rest API. Panel and Gene.                 
 
 The attributes of Gene() instance are:
@@ -162,9 +162,39 @@ Oddly, there are some protein that survived the length cutoff (unsure how). Casp
 * stability < 40 excludes 205
 * remaining: 61
 
-These are here: [candidates](candidates.md)   
+These are here full list of [candidates](candidates.md)   
+Of these the ones with a level 4 confidence are:
 
-But I don't think there must here so I will stop.
+* Protein C8orf37 &mdash; May be involved in photoreceptor outer segment disk morphogenesis (By similarity).
+* Optic atrophy 3 protein &mdash; May play some role in mitochondrial processes.
+* HCLS1-associated protein X-1 &mdash; Recruits the Arp2/3 complex to the cell cortex and regulates reorganization of the cortical actin cytoskeleton...
+* Matrix Gla protein &mdash; Associates with the organic matrix of bone and cartilage. 
+* Protein PET117 homolog, mitochondrial
+* Kappa-casein  &mdash; Kappa-casein stabilizes micelle formation, preventing casein precipitation in milk.
+* Protein C10
+* Odontogenesis associated phosphoprotein
+* Cilia- and flagella-associated protein
+* Twisted gastrulation protein homolog 1
+* Coiled-coil domain-containing protein
+* Mitochondrial-derived peptide MOTS-c
+* Cytochrome c-type heme lyase &mdash; enzyme... interesting...
+* Protein PIH1D3 &mdash; Plays a role in cytoplasmic pre-assembly of axonemal dynein
+* Ectodysplasin-A receptor-associated adapter protein
+* Proteasome maturation protein
+* Succinate dehydrogenase assembly factor 1, mitochondrial
+* Ubiquinol-cytochrome-c reductase complex assembly factor 1
+* Ubiquinol-cytochrome-c reductase complex assembly factor 2
+* Succinate dehydrogenase assembly factor 3, mitochondrial
+* Molybdopterin synthase sulfur carrier subunit
+* Cytochrome c oxidase assembly factor 4 homolog, mitochondrial
+* Cytochrome c oxidase assembly factor 5
+* Cytochrome c oxidase assembly factor 6 homolog
+* NADH dehydrogenase [ubiquinone] 1 alpha subcomplex assembly factor 8
+* NADH dehydrogenase [ubiquinone] 1 alpha subcomplex assembly factor 2
+* Biogenesis of lysosome-related organelles complex 1 subunit 3
+* Biogenesis of lysosome-related organelles complex 1 subunit 6
+
+Roughly half of these are subunits or assembly bits, which explains why they were not crystallised. I could submit some of them to I-Tasser, but I will stop here.
 
 ## Licence
 The licence is the same as the GEL PanelApp. To figure what that is, look for that.
