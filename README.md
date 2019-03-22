@@ -148,12 +148,9 @@ I could check if the uncharacterised stretches are predicted to be disordered, b
 
 #### Candidates
 Which genes are ordered sub-300AA con-4 non-TM unchar genes.
-Guruprasad instability: ('Stable', 94), ('Unstable', 32)                  
+Guruprasad instability > 40 used to determine stability.                 
                       
 The term that stands out is mitochodrial, some iron sulfur cluster protein components and alternative splicing variants.
-
-This makes sense. However, there is an error somewhere.
-Oddly, there are some protein that survived the length cutoff (unsure how). Caspase-14 has a homology model. Repeating from the top.
 
 * not error excludes 84
 * not TM excludes 1185
