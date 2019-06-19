@@ -193,5 +193,7 @@ Of these the ones with a level 4 confidence are:
 
 Roughly half of these are subunits or assembly bits, which explains why they were not crystallised. I could submit some of them to I-Tasser, but I will stop here.
 
+#### Size-unrestricted
+
 ## Licence
 The licence is the same as the GEL PanelApp. To figure what that is, look for that.

@@ -112,7 +112,7 @@ def redux():
                 protein.parse_uniprot()
                 if 'transmembrane region' in protein.features:
                     candidates[protein.uniprot] = 'TM'
-                elif len(protein) > 300:
+                elif len(protein) > 300 and 1 == 0: ##disabled.
                     candidates[protein.uniprot] = 'BIG'
                 else:
                     stability = ProteinAnalysis(protein.sequence).instability_index()
@@ -144,7 +144,8 @@ def redux():
                                                                     l=len(v),
                                                                     c=max([int(x) for x in ref[v.uniprot]['confidence_level'].split('|')])))
 
-redux()
+if __name__ == '__main__':
+    redux()
 
 
 
