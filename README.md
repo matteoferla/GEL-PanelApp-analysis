@@ -4,6 +4,11 @@ An analysis of the genes in Genomics England (GEL) PanelApp.
 ## Code details
 Written for python3.
 
+The code was revisited two years later. With the following changes:
+* made more module-like.
+* `Gene.get_df` returns a pandas table
+* `gene.unexpected_keys` returns any keys that are not recognised (good to see if data defs changed)
+
 ### PanelWrapper
 Two classes within wrap the GEL PanelApp Rest API. Panel and Gene.                 
 
