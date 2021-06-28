@@ -7,8 +7,8 @@ class _APIInterface:
     """
     Inherited by Panel and Gene
     """
-    _list_outfile = 'error.json' #tobeoverridden
-    _list_url = 'localhost' #tobeoverridden
+    _list_outfile = 'error.json'  # tobeoverridden
+    _list_url = 'localhost'  # tobeoverridden
     _mapping = {}
 
     def __init__(self, paneldex):
@@ -20,11 +20,12 @@ class _APIInterface:
                 return paneldex[self._mapping[key]]
             else:
                 return default
+
         self.raw_data = paneldex
         # verify not already parsed.
         if self.__class__ == paneldex.__class__:
             self.__dict__ = paneldex.__dict__
-        else: # parse
+        else:  # parse
             self._data = paneldex
             for k in self._mapping.keys():
                 setattr(self, k, defaults(k))
@@ -36,12 +37,12 @@ class _APIInterface:
         return data
 
     @classmethod
-    def _get_list(cls):
+    def _get_list(cls, cached=False):
         """
         Returns a list of all dictionaries form webservices, not the api.
         :return:
         """
-        if os.path.isfile(cls._list_outfile):  ## load
+        if cached and os.path.isfile(cls._list_outfile):  ## load
             data = json.load(open(cls._list_outfile))
         else:  ##fetch
             # differs from https://panelapp.genomicsengland.co.uk/api/docs/
@@ -51,7 +52,7 @@ class _APIInterface:
             while not done:
                 new_data = cls._fetch_list_query(this_url)
                 ### assert no error
-                if len(new_data.keys())== 0 and 'detail' in data:
+                if len(new_data.keys()) == 0 and 'detail' in data:
                     raise ValueError('Error in page retrieval')
                 ### load data
                 for k in new_data.keys():
@@ -60,8 +61,11 @@ class _APIInterface:
                             data[k].extend(new_data[k])
                         elif isinstance(data[k], str):
                             data[k] += str(new_data[k])
+                        elif isinstance(data[k], int) or data[k] is None:
+                            pass
                         else:
                             warn('Unknown type {t} for key {k}'.format(t=type(data[k]).__name__, k=k))
+                            #  data[k] is kept as is.
                     else:
                         data[k] = new_data[k]
                 ### proceed
@@ -70,6 +74,7 @@ class _APIInterface:
                     this_url = new_data['next']
                 else:
                     done = True
+            # file is same even if cached is off.
             json.dump(data, open(cls._list_outfile, 'w'))
         return data
 
@@ -78,4 +83,5 @@ class _APIInterface:
         return set(self.raw_data.keys()) - set(self._mapping.values())
 
     def __str__(self):
-        return pprint.pformat({k: v for (k,v) in self.__dict__.items() if type(v).__name__ != 'method' and k != '_data'})
+        return pprint.pformat({k: v for (k, v) in self.__dict__.items()
+                               if type(v).__name__ != 'method' and k != '_data'})

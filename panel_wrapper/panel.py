@@ -3,6 +3,8 @@ from .api_interface import _APIInterface
 class Panel(_APIInterface):
     """
     Inherits __init___ and classmethod _get_list
+
+    The main entrypoint for now is ``get_list``
     """
     _list_outfile = 'list_panels.json'
     _list_url = 'https://panelapp.genomicsengland.co.uk/WebServices/list_panels/?format=json'
@@ -16,5 +18,5 @@ class Panel(_APIInterface):
                'types': 'PanelTypes'}
 
     @classmethod
-    def get_list(cls):
-        return [cls(p) for p in cls._get_list()['result']]
+    def get_list(cls, cached=False):
+        return [cls(p) for p in cls._get_list(cached)['result']]

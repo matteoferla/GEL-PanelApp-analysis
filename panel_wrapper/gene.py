@@ -4,7 +4,9 @@ from .api_interface import _APIInterface
 
 class Gene(_APIInterface):
     """
-    Inherits __init___ and classmethod _get_list
+    Inherits __init___ and classmethod _get_list.
+
+    The main entrypoint for now is ``get_list``
     """
     _list_outfile = 'list_gene.json'
     _list_url = 'https://panelapp.genomicsengland.co.uk/api/v1/genes/?format=json'
@@ -19,7 +21,8 @@ class Gene(_APIInterface):
                 'phenotypes': 'phenotypes',
                 'mode_of_inheritance': 'mode_of_inheritance',
                 'tags': 'tags',
-                'panel':'panel'
+                'panel':'panel',
+                'transcript': 'transcript'
                 }
 
     def clean_inheritance(self):
@@ -43,8 +46,8 @@ class Gene(_APIInterface):
         return data
 
     @classmethod
-    def get_list(cls, verbose=False):
-        data = cls._get_list()
+    def get_list(cls, verbose=False, cached=False):
+        data = cls._get_list(cached)
         if verbose:
             print('Count',data['count'])
             if 'next' in data:
@@ -55,9 +58,9 @@ class Gene(_APIInterface):
         return [cls(g) for g in data['results']]
 
     @classmethod
-    def get_dict(cls):
+    def get_dict(cls, cached=False):
         genedex = defaultdict(list)
-        data = cls.get_list()
+        data = cls.get_list(cached)
         for gene in data:
             genedex[gene.name].append(gene)
         return genedex
